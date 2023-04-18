@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MediaCaptureWPF.Native\MediaCaptureWPF.Native.vcxproj" />
+    <ProjectReference Include="..\MediaSink\MediaSink.vcxproj" />
   </ItemGroup>
 
   <!--ItemGroup>

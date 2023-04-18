@@ -1,7 +1,7 @@
 #include "CapturePreviewNative.h"
 
-#include "..\MediaSink\DebuggerLogger.h"
-#include "..\MediaSink\VideoSinkFactory.h"
+#include "DebuggerLogger.h"
+#include "VideoSinkFactory.h"
 
 #include <d3d9.h>
 #include <d3d11_1.h>

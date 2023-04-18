@@ -7,11 +7,16 @@
     <ClInclude Include="MediaTypeFormatter.h" />
     <ClInclude Include="VideoSinkFactory.h" />
     <ClInclude Include="COMExceptions.h" />
+    <ClInclude Include="CapturePreviewNative.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MediaStreamSink.cpp" />
     <ClCompile Include="DebuggerLogger.cpp" />
     <ClCompile Include="MediaTypeFormatter.cpp" />
     <ClCompile Include="VideoSinkFactory.cpp" />
+    <ClCompile Include="CapturePreviewNative.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="$(MSBuildThisFileDirectory)version.rc" />
   </ItemGroup>
 </Project>

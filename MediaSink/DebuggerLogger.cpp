@@ -1,5 +1,7 @@
 #include "DebuggerLogger.h"
 
+#include <stdio.h>
+
 namespace MediaCapturePreview
 {
     DebuggerLogger::DebuggerLogger()
