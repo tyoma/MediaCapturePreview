@@ -9,12 +9,11 @@ using namespace System::Runtime::InteropServices;
 using namespace System::Windows;
 using namespace System::Windows::Interop;
 using namespace System::Windows::Threading;
-using namespace MediaCaptureWPF::Native;
 using namespace Microsoft::VisualStudio::TestTools::UnitTesting;
 
 #undef Yield
 
-namespace UnitTestsCx
+namespace MediaCapturePreview::tests
 {
 
     ref class MockD3DImage : public D3DImage
