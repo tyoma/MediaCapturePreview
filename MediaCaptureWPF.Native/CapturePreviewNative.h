@@ -1,9 +1,14 @@
 #pragma once
 
-class CapturePreviewNativeState;
+#include <atlcomcli.h> // WRL is blocked in C++/CLI projects, so using the next best thing
+#include <comdef.h>
+#include <mfidl.h>
+#include <msclr\gcroot.h>
 
-namespace MediaCaptureWPF { namespace Native
+namespace MediaCapturePreview
 {
+    class CapturePreviewNativeState;
+
     public ref class CapturePreviewNative
     {
     public:
@@ -34,4 +39,4 @@ namespace MediaCaptureWPF { namespace Native
         System::Object^ m_sink;
         CapturePreviewNativeState* m_state;
     };
-} }
+}

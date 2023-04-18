@@ -13,25 +13,21 @@
   </ImportGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="COMExceptions.h" />
     <ClInclude Include="DebuggerLogger.h" />
     <ClInclude Include="MediaSink.h" />
     <ClInclude Include="VideoSinkFactory.h" />
     <ClInclude Include="MediaStreamSink.h" />
     <ClInclude Include="MediaTypeFormatter.h" />
-    <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DebuggerLogger.cpp" />
     <ClCompile Include="VideoSinkFactory.cpp" />
     <ClCompile Include="MediaStreamSink.cpp" />
     <ClCompile Include="MediaTypeFormatter.cpp" />
-    <ClCompile Include="stdafx.cpp">
-      <PrecompiledHeader>Create</PrecompiledHeader>
-    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
 </Project>

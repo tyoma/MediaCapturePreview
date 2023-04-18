@@ -1,78 +1,90 @@
 #pragma once
 
-//
-// Logging to debugger's Output window
-//
+#include <windows.h>
 
-enum class LogLevel
+namespace MediaCapturePreview
 {
-    Critical = 1,
-    Error,
-    Warning,
-    Information,
-    Verbose
-};
+    //
+    // Logging to debugger's Output window
+    //
 
-class DebuggerLogger
-{
-public:
-
-    DebuggerLogger();
-
-#ifdef NDEBUG
-    bool IsEnabled(_In_ LogLevel /*level*/) const
+    enum class LogLevel
     {
-        return false; // Store validation rejects OutputDebugString()
-    }
-#else
-    bool IsEnabled(_In_ LogLevel level) const
-    {
-        return (level <= _level) && ::IsDebuggerPresent();
-    }
-#endif
+        Critical = 1,
+        Error,
+        Warning,
+        Information,
+        Verbose
+    };
 
-    template <size_t L>
-    void Log(_In_ char const (&function)[L], _In_ LogLevel level, _In_ PCSTR format, ...)
+    class DebuggerLogger
     {
-        if (!IsEnabled(level))
+    public:
+
+        DebuggerLogger();
+
+    #ifdef NDEBUG
+        bool IsEnabled(_In_ LogLevel /*level*/) const
         {
-            return;
+            return false; // Store validation rejects OutputDebugString()
+        }
+    #else
+        bool IsEnabled(_In_ LogLevel level) const
+        {
+            return (level <= _level) && ::IsDebuggerPresent();
+        }
+    #endif
+
+        template <size_t L>
+        void Log(_In_ char const (&function)[L], _In_ LogLevel level, _In_ PCSTR format, ...)
+        {
+            if (!IsEnabled(level))
+            {
+                return;
+            }
+
+            va_list args;
+            va_start(args, format);
+            _Log(function, L, format, args);
+            va_end(args);
         }
 
-        va_list args;
-        va_start(args, format);
-        _Log(function, L, format, args);
-        va_end(args);
-    }
-
-    void Log(_In_reads_(L) const char *function, _In_ size_t L, _In_ LogLevel level, _In_ PCSTR format, ...)
-    {
-        if (!IsEnabled(level))
+        void Log(_In_reads_(L) const char *function, _In_ size_t L, _In_ LogLevel level, _In_ PCSTR format, ...)
         {
-            return;
+            if (!IsEnabled(level))
+            {
+                return;
+            }
+
+            va_list args;
+            va_start(args, format);
+            _Log(function, L, format, args);
+            va_end(args);
         }
 
-        va_list args;
-        va_start(args, format);
-        _Log(function, L, format, args);
-        va_end(args);
-    }
-
-    void Log(_In_ LogLevel level, _In_ PCSTR message)
-    {
-        if (!IsEnabled(level))
+        void Log(_In_ LogLevel level, _In_ PCSTR message)
         {
-            return;
+            if (!IsEnabled(level))
+            {
+                return;
+            }
+
+            OutputDebugStringA(message);
         }
 
-        OutputDebugStringA(message);
+    private:
+
+        void _Log(_In_reads_(L) const char *function, _In_ size_t L, _In_ PCSTR format, va_list args);
+
+        LogLevel _level;
+    };
+
+    #define Trace(format, ...) { \
+        if(s_logger.IsEnabled(LogLevel::Information)) { s_logger.Log(__FUNCTION__, LogLevel::Information, format, __VA_ARGS__); } \
     }
+    #define TraceError(format, ...) { \
+        if(s_logger.IsEnabled(LogLevel::Error)) { s_logger.Log(__FUNCTION__, LogLevel::Error, format, __VA_ARGS__); } \
+    }
+}
 
-private:
-
-    void _Log(_In_reads_(L) const char *function, _In_ size_t L, _In_ PCSTR format, va_list args);
-
-    LogLevel _level;
-};
-
-extern __declspec(selectany) DebuggerLogger s_logger;
+extern __declspec(selectany) MediaCapturePreview::DebuggerLogger s_logger;

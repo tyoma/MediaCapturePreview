@@ -1,4 +1,4 @@
-﻿using MediaCaptureWPF.Native;
+﻿using MediaCapturePreview;
 using System;
 using System.Threading.Tasks;
 using System.Windows;

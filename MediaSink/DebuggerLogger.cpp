@@ -1,62 +1,64 @@
-#include "stdafx.h"
 #include "DebuggerLogger.h"
 
-DebuggerLogger::DebuggerLogger()
-    : _level(LogLevel::Information)
+namespace MediaCapturePreview
 {
+    DebuggerLogger::DebuggerLogger()
+        : _level(LogLevel::Information)
+    {
 #ifndef NDEBUG // Store validation rejects OutputDebugString()
-    OutputDebugStringA("Starting tracing\n");
+        OutputDebugStringA("Starting tracing\n");
 #endif
-}
+    }
 
-#ifdef NDEBUG
-void DebuggerLogger::_Log(_In_reads_(L) const char * /*function*/, _In_ size_t /*L*/, _In_ PCSTR /*format*/, va_list /*args*/)
-{
-    // Store validation rejects OutputDebugString()
-}
+    #ifdef NDEBUG
+    void DebuggerLogger::_Log(_In_reads_(L) const char * /*function*/, _In_ size_t /*L*/, _In_ PCSTR /*format*/, va_list /*args*/)
+    {
+        // Store validation rejects OutputDebugString()
+    }
 #else
-void DebuggerLogger::_Log(_In_reads_(L) const char *function, _In_ size_t L, _In_ PCSTR format, va_list args)
-{
-    char message[2048];
-    size_t pos = 0;
-    size_t size = sizeof(message);
-
-    // Trace header: function name
-    if (0 == memcpy_s(message + pos, size, function, L - 1))
+    void DebuggerLogger::_Log(_In_reads_(L) const char *function, _In_ size_t L, _In_ PCSTR format, va_list args)
     {
-        pos += L - 1;
-        size -= L - 1;
-    }
+        char message[2048];
+        size_t pos = 0;
+        size_t size = sizeof(message);
 
-    if (size >= 1)
-    {
-        message[pos] = ' ';
-        pos++;
-        size--;
-    }
+        // Trace header: function name
+        if (0 == memcpy_s(message + pos, size, function, L - 1))
+        {
+            pos += L - 1;
+            size -= L - 1;
+        }
 
-    // Trace message
-    int cch = vsnprintf_s(message + pos, size, _TRUNCATE, format, args);
-    if (cch >= 0)
-    {
-        pos += cch;
-        size -= cch;
-    }
-    else
-    {
-        pos += size;
-        size = 0;
-    }
+        if (size >= 1)
+        {
+            message[pos] = ' ';
+            pos++;
+            size--;
+        }
 
-    // Enforce line return and null termination
-    if (size < 2)
-    {
-        pos -= 2;
-        size += 2;
-    }
-    message[pos] = '\n';
-    message[pos + 1] = '\0';
+        // Trace message
+        int cch = vsnprintf_s(message + pos, size, _TRUNCATE, format, args);
+        if (cch >= 0)
+        {
+            pos += cch;
+            size -= cch;
+        }
+        else
+        {
+            pos += size;
+            size = 0;
+        }
 
-    OutputDebugStringA(message);
-}
+        // Enforce line return and null termination
+        if (size < 2)
+        {
+            pos -= 2;
+            size += 2;
+        }
+        message[pos] = '\n';
+        message[pos + 1] = '\0';
+
+        OutputDebugStringA(message);
+    }
 #endif
+}

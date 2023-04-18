@@ -18,7 +18,6 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PrecompiledHeader>Use</PrecompiledHeader>
       <DisableSpecificWarnings>4945</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -28,16 +27,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CapturePreviewNative.h" />
-    <ClInclude Include="CapturePreviewNativeState.h" />
-    <ClInclude Include="SampleCallback.h" />
-    <ClInclude Include="Stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CapturePreviewNative.cpp" />
-    <ClCompile Include="CapturePreviewNativeState.cpp" />
-    <ClCompile Include="Stdafx.cpp">
-      <PrecompiledHeader>Create</PrecompiledHeader>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FrameworkReference Include="Microsoft.WindowsDesktop.App.WPF" />

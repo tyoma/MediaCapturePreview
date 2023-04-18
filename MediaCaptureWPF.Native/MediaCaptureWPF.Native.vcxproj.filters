@@ -2,13 +2,10 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="Stdafx.h" />
-    <ClInclude Include="SampleCallback.h" />
-    <ClInclude Include="CapturePreviewNativeState.h" />
     <ClInclude Include="CapturePreviewNative.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Stdafx.cpp" />
-    <ClCompile Include="CapturePreviewNativeState.cpp" />
     <ClCompile Include="CapturePreviewNative.cpp" />
   </ItemGroup>
   <ItemGroup>
