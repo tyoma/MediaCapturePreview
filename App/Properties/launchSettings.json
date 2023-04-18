@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "VideoPreview.App": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

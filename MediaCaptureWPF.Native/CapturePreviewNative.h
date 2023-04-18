@@ -1,7 +1,5 @@
 #pragma once
 
-using namespace System;
-
 class CapturePreviewNativeState;
 
 namespace MediaCaptureWPF { namespace Native
@@ -17,8 +15,8 @@ namespace MediaCaptureWPF { namespace Native
         // Finalizer (GC's non-deterministic destruction)
         !CapturePreviewNative();
 
-        property Object^ MediaSink {
-            Object^ get() { return m_sink; }
+        property System::Object^ MediaSink {
+            System::Object^ get() { return m_sink; }
         }
 
     internal:
@@ -33,7 +31,7 @@ namespace MediaCaptureWPF { namespace Native
         const unsigned int m_height;
         bool m_imageInitialized;
         System::Windows::Interop::D3DImage^ m_image;
-        Object^ m_sink;
+        System::Object^ m_sink;
         CapturePreviewNativeState* m_state;
     };
 } }

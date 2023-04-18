@@ -1,0 +1,30 @@
+<Project DefaultTargets="Build">
+
+  <PropertyGroup>
+    <TargetFrameworkBase>net6.0</TargetFrameworkBase>
+    <TargetFramework>$(TargetFrameworkBase)-windows10.0.18362.0</TargetFramework>
+    <Platforms>x64</Platforms>
+
+    <VersionFile>$([System.IO.File]::ReadAllText("$(MSBuildThisFileDirectory)..\\version.h"))</VersionFile>
+    <Product>$([System.Text.RegularExpressions.Regex]::Match($(VersionFile),'MCP_PRODUCT_NAME +\"(.*)\"').Result("$1"))</Product>
+    <Company>$([System.Text.RegularExpressions.Regex]::Match($(VersionFile),'MCP_PRODUCT_COMPANY_NAME +\"(.*)\"').Result("$1"))</Company>
+    <Copyright>$([System.Text.RegularExpressions.Regex]::Match($(VersionFile),'MCP_PRODUCT_COPYRIGHT +\"(.*)\"').Result("$1"))</Copyright>
+    <Version>$([System.Text.RegularExpressions.Regex]::Match($(VersionFile),"MCP_VERSION_MAJOR +([0-9]+)").Result("$1")).$([System.Text.RegularExpressions.Regex]::Match($(VersionFile),"MCP_VERSION_MINOR +([0-9]+)").Result("$1")).$([System.Text.RegularExpressions.Regex]::Match($(VersionFile),"MCP_BUILD +([0-9]+)").Result("$1")).$([System.Text.RegularExpressions.Regex]::Match($(VersionFile),"MCP_BRANCH +([0-9]+)").Result("$1"))</Version>
+
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+
+    <OutputPath>$(SolutionDir)_bin\$(Configuration)_$(Platform)\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="obj_fx\**" />
+    <EmbeddedResource Remove="obj_fx\**" />
+    <None Remove="obj_fx\**" />
+    <Page Remove="obj_fx\**" />
+  </ItemGroup>
+
+</Project>
