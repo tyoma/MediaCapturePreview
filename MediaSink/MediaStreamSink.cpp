@@ -19,7 +19,7 @@ namespace MediaCapturePreview
         __in const function<void(IMFSample*)>& sampleHandler
         )
         : _shutdown(false)
-        , _id(-1)
+        , _id(static_cast<DWORD>(-1))
         , _width(0)
         , _height(0)
         , _sampleHandler(sampleHandler)
@@ -199,16 +199,16 @@ namespace MediaCapturePreview
         __in MediaEventType met,
         __in REFGUID extendedType,
         __in HRESULT status,
-        __in_opt const PROPVARIANT *value
+        __in_opt const PROPVARIANT *value_
         )
     {
-        return ExceptionBoundary([this, met, extendedType, status, value]()
+        return ExceptionBoundary([this, met, extendedType, status, value_]()
         {
             auto lock = _lock.LockExclusive();
 
             _VerifyNotShutdown();
 
-            CHK(_eventQueue->QueueEventParamVar(met, extendedType, status, value));
+            CHK(_eventQueue->QueueEventParamVar(met, extendedType, status, value_));
         });
     }
 
@@ -219,7 +219,6 @@ namespace MediaCapturePreview
         HRESULT hr = ExceptionBoundary([this, mediaType, closestMediaType, &supported]()
         {
             auto lock = _lock.LockExclusive();
-            HRESULT hr = S_OK;
 
             if (closestMediaType != nullptr)
             {
@@ -273,7 +272,6 @@ namespace MediaCapturePreview
         HRESULT hr = ExceptionBoundary([this, mediaType]()
         {
             auto lock = _lock.LockExclusive();
-            HRESULT hr = S_OK;
 
             CHKNULL(mediaType);
 

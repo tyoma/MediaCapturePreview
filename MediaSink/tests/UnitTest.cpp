@@ -15,31 +15,6 @@ using namespace Microsoft::VisualStudio::TestTools::UnitTesting;
 
 namespace MediaCapturePreview::tests
 {
-
-    ref class MockD3DImage : public D3DImage
-    {
-    public:
-        MockD3DImage()
-            : m_callCountAddDirtyRect(0)
-        {
-        }
-
-        void Lock()
-        {
-            m_callCountAddDirtyRect++;
-            D3DImage::Lock();
-        }
-
-        void AddDirtyRect(Int32Rect dirtyRect)
-        {
-            m_callCountAddDirtyRect++;
-            D3DImage::AddDirtyRect(dirtyRect);
-        }
-
-        unsigned int m_callCountAddDirtyRect;
-
-    };
-
     [TestClass]
     public ref class UnitTest
     {
@@ -63,7 +38,7 @@ namespace MediaCapturePreview::tests
         void TestCreate()
         {
             auto image = gcnew D3DImage();
-            auto preview = gcnew CapturePreviewNative(image, 320, 240);
+            /*auto preview =*/ gcnew CapturePreviewNative(image, 320, 240);
         };
 
         [TestMethod]
