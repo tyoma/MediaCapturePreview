@@ -16,7 +16,7 @@
   </ImportGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <DisableSpecificWarnings>4945</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4945;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalDependencies>mfuuid.lib;mfplat.lib;RuntimeObject.lib;D3d9.lib</AdditionalDependencies>
